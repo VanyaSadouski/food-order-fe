@@ -1,0 +1,23 @@
+{
+  "parser": "babel-eslint",
+  "plugins": [
+    "jsx-a11y",
+    "react",
+    "import",
+    "react-hooks",
+    "no-unsanitized"
+  ],
+  "rules": {
+    "no-unsanitized/method": "error",
+    "no-unsanitized/property": [
+      "error",
+      {
+        "escape": {
+          "methods": [
+            "sanitizeHtml"
+          ]
+        }
+      }
+    ]
+  }
+}

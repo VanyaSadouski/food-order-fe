@@ -1,0 +1,67 @@
+{
+  "parser": "babel-eslint",
+  "env": {
+    "browser": true,
+    "jest": true,
+    "mocha": true
+  },
+  "extends": ["airbnb", "plugin:prettier/recommended"],
+  "globals": {
+    "__DEV__": false,
+    "__TEST__": false,
+    "__PROD__": false,
+    "__COVERAGE__": false
+  },
+  "plugins": ["prettier", "react-hooks"],
+  "rules": {
+    "react/prop-types": "off",
+    "react/destructuring-assignment": "off",
+    "class-methods-use-this": "off",
+    "prettier/prettier": [
+      "error",
+      {
+        "trailingComma": "all",
+        "printWidth": 120
+      }
+    ],
+    "no-underscore-dangle": "off",
+    "no-param-reassign": "off",
+    "no-restricted-globals": "off",
+    "react/forbid-prop-types": "off",
+    "react/jsx-filename-extension": "off",
+    "import/no-cycle": "warn",
+    "react/prefer-stateless-function": "warn",
+    "jsx-a11y/anchor-is-valid": "off",
+    "jsx-a11y/click-events-have-key-events": "off",
+    "jsx-a11y/label-has-for": "off",
+    "jsx-a11y/interactive-supports-focus": "off",
+    "no-use-before-define": [
+      "warn",
+      {
+        "functions": true
+      }
+    ],
+    "react/jsx-wrap-multilines": [
+      "error",
+      {
+        "declaration": "parens",
+        "assignment": "parens",
+        "return": "parens",
+        "arrow": "parens",
+        "condition": "parens",
+        "logical": "parens",
+        "prop": "ignore"
+      }
+    ],
+    "react-hooks/rules-of-hooks": "error",
+    "react-hooks/exhaustive-deps": "off",
+    "import/no-extraneous-dependencies": [
+      "error",
+      {
+        "devDependencies": ["**/*.stories.js", "**/*.spec.js", "**/util/testing/**"]
+      }
+    ],
+    "import/extensions": "off",
+    "import/prefer-default-export": "off"
+  }
+}
