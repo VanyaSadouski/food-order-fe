@@ -21,6 +21,7 @@ const layout = {
 
 function Registration() {
   const [form] = Form.useForm();
+  // eslint-disable-next-line no-unused-vars
   const onSubmit = (values) => {
     // console.log(values);
   };
