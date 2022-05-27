@@ -6,10 +6,12 @@
     "start": "react-scripts start",
     "build": "react-scripts build",
     "eject": "react-scripts eject",
+    "husky": "husky",
     "prettier": "prettier --trailing-comma all --print-width 120 --write \"src/**/*.js\"",
     "lint": "eslint ./src --color",
     "lint:fix": "npm run lint -- --fix",
-    "lint:security": "eslint --no-eslintrc -c .eslintrc.security src"
+    "lint:security": "eslint --no-eslintrc -c .eslintrc.security src",
+    "prepare": "husky install"
   },
   "husky": {
     "hooks": {
