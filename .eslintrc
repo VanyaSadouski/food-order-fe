@@ -62,12 +62,6 @@
     "react-hooks/rules-of-hooks": "error",
     "react-hooks/exhaustive-deps": "off",
     "array-callback-return": "off",
-    "import/no-extraneous-dependencies": [
-      "error",
-      {
-        "devDependencies": ["**/*.stories.js", "**/*.spec.js", "**/util/testing/**"]
-      }
-    ],
     "import/extensions": "off",
     "import/prefer-default-export": "off"
   }
