@@ -1,5 +1,11 @@
 {
-  "parser": "babel-eslint",
+  "parser": "@babel/eslint-parser",
+  "parserOptions": {
+    "requireConfigFile": false,
+    "babelOptions": {
+      "presets": ["@babel/preset-react"]
+   }
+  },
   "env": {
     "browser": true,
     "jest": true,
@@ -55,6 +61,7 @@
     ],
     "react-hooks/rules-of-hooks": "error",
     "react-hooks/exhaustive-deps": "off",
+    "array-callback-return": "off",
     "import/no-extraneous-dependencies": [
       "error",
       {
