@@ -6,3 +6,4 @@ export const PAGE_NOT_FOUND = '/page-not-found';
 export const CART = '/cart';
 export const PERSONAL_INFO = '/personal-info';
 export const LOGOUT = '/log-out';
+export const API_BASE_URL = 'http://localhost:5000/api/';

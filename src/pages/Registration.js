@@ -1,7 +1,6 @@
-/* eslint-disable no-template-curly-in-string */
-/* eslint-disable react/jsx-props-no-spreading */
 import React from 'react';
 import { Form, Input, Button, Select } from 'antd';
+import { registration } from '../http/userAPI';
 
 const { Option } = Select;
 const validateMessages = {
@@ -21,9 +20,15 @@ const layout = {
 
 function Registration() {
   const [form] = Form.useForm();
-  // eslint-disable-next-line no-unused-vars
-  const onSubmit = (values) => {
-    // console.log(values);
+  const onSubmit = async (values) => {
+    const requestBody = {
+      firstName: values.firstName,
+      lastName: values.lastName,
+      email: values.email,
+      password: values.password,
+      phone: values.prefix + values.phone,
+    };
+    await registration(requestBody);
   };
 
   const prefixSelector = (
@@ -135,7 +140,7 @@ function Registration() {
         >
           <Input.Password />
         </Form.Item>
-        <Form.Item wrapperCol={{ ...layout.wrapperCol, offset: 8 }}>
+        <Form.Item wrapperCol={{ ...layout.wrapperCol, offset: 10 }}>
           <Button style={{ width: '100%' }} type="primary" htmlType="submit">
             Submit
           </Button>

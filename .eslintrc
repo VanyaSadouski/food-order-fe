@@ -4,7 +4,7 @@
     "requireConfigFile": false,
     "babelOptions": {
       "presets": ["@babel/preset-react"]
-   }
+    }
   },
   "env": {
     "browser": true,
@@ -35,12 +35,14 @@
     "no-restricted-globals": "off",
     "react/forbid-prop-types": "off",
     "react/jsx-filename-extension": "off",
+    "react/jsx-props-no-spreading": "off",
     "import/no-cycle": "warn",
     "react/prefer-stateless-function": "warn",
     "jsx-a11y/anchor-is-valid": "off",
     "jsx-a11y/click-events-have-key-events": "off",
     "jsx-a11y/label-has-for": "off",
     "jsx-a11y/interactive-supports-focus": "off",
+    "no-template-curly-in-string": "off",
     "no-use-before-define": [
       "warn",
       {

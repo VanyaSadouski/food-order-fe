@@ -1,48 +1,71 @@
 import { Menu } from 'antd';
 import React from 'react';
-import { useSelector } from 'react-redux';
+import { useDispatch, useSelector } from 'react-redux';
 import { NavLink } from 'react-router-dom';
 import { adminRoutes, authRoutes, publicRoutes } from '../routes';
-import { PERSONAL_INFO } from '../util/consts';
+import { removeUserInfo } from '../store/user';
+import { KITCHEN } from '../util/consts';
 
 const menuStyle = {
   display: 'flex',
   justifyContent: 'flex-end',
 };
 
-function getNavLink(path, title, userName = '') {
-  if (path === PERSONAL_INFO) {
-    return <NavLink to={path}> {userName} </NavLink>;
-  }
+function getNavLink(path, title) {
   return <NavLink to={path}> {title} </NavLink>;
 }
 
-function getLinks(isAdmin = false, isAuth = false) {
+function getPublicLinks() {
+  return publicRoutes;
+}
+
+function getAuthLinks(isAuth, isAdmin) {
   let links;
   if (isAuth) {
+    links = authRoutes;
     if (isAdmin) {
-      links = authRoutes.concat(adminRoutes);
-    } else {
-      links = authRoutes;
+      links = adminRoutes.concat(authRoutes);
     }
-  } else {
-    links = publicRoutes;
   }
   return links;
 }
 
 function Navbar() {
-  const isAdmin = useSelector((state) => state?.user?.isAdmin);
-  const isAuthenticated = useSelector((state) => state?.user?.authenticated);
-  const userName = useSelector((state) => state?.user?.firstName);
+  const userInfo = useSelector((state) => state?.user?.userInfo);
+  const isAdmin = userInfo?.isAdmin;
+  const isAuthenticated = userInfo?.authenticated;
+  const userName = userInfo?.firstName;
+  const dispatch = useDispatch();
 
-  const links = getLinks(isAdmin, isAuthenticated).map(({ path, name }) => (
-    <Menu.Item key={path}>{getNavLink(path, name, userName)}</Menu.Item>
+  const handleLogout = () => {
+    localStorage.removeItem('token');
+    dispatch(removeUserInfo());
+  };
+
+  const publicLinks = getPublicLinks()?.map(({ path, name }) => (
+    <Menu.Item key={path}>{getNavLink(path, name)}</Menu.Item>
   ));
+
+  const settingLinks = getAuthLinks(isAuthenticated, isAdmin)
+    ?.filter(({ path }) => path !== KITCHEN)
+    .map(({ path, name }) => <Menu.Item key={path}>{getNavLink(path, name)}</Menu.Item>);
+
+  const authLinks = (
+    <>
+      <Menu.Item key={KITCHEN}>{getNavLink(KITCHEN, 'Food')}</Menu.Item>
+      <Menu.SubMenu key="SubMenu" title={userName}>
+        {settingLinks}
+        <Menu.Item onClick={handleLogout} key="logout">
+          Log out
+        </Menu.Item>
+      </Menu.SubMenu>
+    </>
+  );
+
   return (
     <div>
       <Menu style={menuStyle} mode="horizontal">
-        {links}
+        {isAuthenticated ? authLinks : publicLinks}
       </Menu>
     </div>
   );

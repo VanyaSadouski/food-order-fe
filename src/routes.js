@@ -4,9 +4,14 @@ import Kitchen from './pages/Kitchen';
 import Login from './pages/Login';
 import PersonalInfo from './pages/PersonalInfo';
 import Registration from './pages/Registration';
-import { ADMIN_ROUTE, CART, KITCHEN, LOGIN, LOGOUT, PERSONAL_INFO, REGISTRATION } from './util/consts';
+import { ADMIN_ROUTE, CART, KITCHEN, LOGIN, PERSONAL_INFO, REGISTRATION } from './util/consts';
 
 export const authRoutes = [
+  {
+    path: KITCHEN,
+    Component: Kitchen,
+    name: 'Food',
+  },
   {
     path: PERSONAL_INFO,
     Component: PersonalInfo,
@@ -17,18 +22,13 @@ export const authRoutes = [
     Component: Cart,
     name: 'Cart',
   },
-  {
-    path: LOGOUT,
-    Component: Kitchen,
-    name: 'Log out',
-  },
 ];
 
 export const publicRoutes = [
   {
     path: KITCHEN,
     Component: Kitchen,
-    name: 'Menu',
+    name: 'Food',
   },
   {
     path: LOGIN,

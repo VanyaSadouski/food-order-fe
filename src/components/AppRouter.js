@@ -10,12 +10,13 @@ function getRoute(path, Component) {
 }
 
 function AppRouter() {
-  const isAdmin = useSelector((state) => state?.user?.isAdmin);
-  const isAuthenticated = useSelector((state) => state?.user?.authenticated);
+  const userInfo = useSelector((state) => state?.user?.userInfo);
+  const isAdmin = userInfo?.isAdmin;
+  const isAuthenticated = userInfo?.authenticated;
 
   const availableRoutes =
     isAdmin && isAuthenticated
-      ? adminRoutes.map(({ path, Component }) => getRoute(path, Component))
+      ? authRoutes.concat(adminRoutes).map(({ path, Component }) => getRoute(path, Component))
       : isAuthenticated
       ? authRoutes.map(({ path, Component }) => getRoute(path, Component))
       : publicRoutes.map(({ path, Component }) => getRoute(path, Component));
