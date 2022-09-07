@@ -30,3 +30,11 @@ export const check = async () => {
     notificationErrorHandler(err?.response);
   }
 };
+
+export const getUserInfoById = async (id) => {
+  try {
+    return await $authHost.get(`user/info/${id}`);
+  } catch (err) {
+    notificationErrorHandler(err?.response);
+  }
+};

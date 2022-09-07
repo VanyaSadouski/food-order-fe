@@ -32,14 +32,15 @@ function Login() {
       password: values.password,
     };
     const loginResp = await login(requestBody);
-    const { role, firstName, lastName, email, phone } = loginResp;
-    dispatch(setUserInfo({ isAdmin: role === 'admin', firstName, lastName, email, phone, authenticated: true }));
+    const { role, firstName, lastName, email, phone, _id } = loginResp;
+    dispatch(setUserInfo({ isAdmin: role === 'admin', firstName, lastName, email, phone, authenticated: true, _id }));
     navigate(KITCHEN, { replace: true });
   };
 
   return (
     <div>
       <Form
+        autocomplete="off"
         form={form}
         style={{ height: '100%' }}
         // eslint-disable-next-line react/jsx-props-no-spreading
