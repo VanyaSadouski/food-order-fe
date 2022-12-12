@@ -1,7 +1,7 @@
-import { Button, Form, Input, InputNumber, Upload } from 'antd';
+import { Button, Form, Input, InputNumber } from 'antd';
 import React, { useState } from 'react';
 import styled from 'styled-components';
-import { PlusCircleOutlined, UploadOutlined } from '@ant-design/icons';
+import { PlusCircleOutlined } from '@ant-design/icons';
 
 const Wrapper = styled.div`
   position: relative;
@@ -37,26 +37,23 @@ const AddNewDishButton = styled.button`
   }
 `;
 
-function NewDishForm({ newDishForm, isFormActive, onAddNewDish, onFinish }) {
-  const [fileList, setFileList] = useState([]);
+function NewDishForm({ newDishForm, onFinish, setImage }) {
+  const handleImage = (e) => {
+    setImage(e.target.files[0]);
+  };
+
+  const [isFormActiveState, setIsFormActive] = useState(false);
+
+  const onAddNewDish = () => {
+    setIsFormActive(true);
+  };
 
   return (
     <Wrapper>
-      {isFormActive && (
+      {isFormActiveState && (
         <Form layout="vertical" form={newDishForm} onFinish={onFinish}>
           <Form.Item name="image">
-            <Upload
-              action={() => true}
-              accept="image/*"
-              fileList={fileList}
-              beforeUpload={(file) => {
-                setFileList([file]);
-                return false;
-              }}
-              onRemove={() => setFileList([])}
-            >
-              {fileList.length === 1 ? null : <Button icon={<UploadOutlined />}>Upload image</Button>}
-            </Upload>
+            <input type="file" onChange={handleImage} />
           </Form.Item>
           <Form.Item
             label="Product"
@@ -113,12 +110,8 @@ function NewDishForm({ newDishForm, isFormActive, onAddNewDish, onFinish }) {
           </Form.Item>
         </Form>
       )}{' '}
-      {!isFormActive && (
-        <AddNewDishButton
-          onClick={() => {
-            onAddNewDish();
-          }}
-        >
+      {!isFormActiveState && (
+        <AddNewDishButton onClick={onAddNewDish}>
           <PlusCircleOutlined />
         </AddNewDishButton>
       )}

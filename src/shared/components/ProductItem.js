@@ -3,6 +3,7 @@ import { Button } from 'antd';
 import React from 'react';
 import { useSelector } from 'react-redux';
 import styled from 'styled-components';
+import { API_BASE_URL } from '../../util/consts';
 
 const Product = styled.div`
   display: flex;
@@ -75,6 +76,11 @@ const ProductInfo = styled.div`
 const ProductImg = styled.div`
   border-bottom: 1px solid gray;
   height: 30%;
+
+  img {
+    width: 100%;
+    height: 100%;
+  }
 `;
 
 function ProductItem({ item, onRemoveProduct, onAddToCart, onRemoveFromCart, isFoodSettings }) {
@@ -96,7 +102,9 @@ function ProductItem({ item, onRemoveProduct, onAddToCart, onRemoveFromCart, isF
   return (
     <Product>
       {item.image ? (
-        <ProductImg />
+        <ProductImg>
+          <img loading="lazy" src={`${API_BASE_URL}products/image/${item.image}`} alt="product" />
+        </ProductImg>
       ) : (
         <div className="no-image">
           <CoffeeOutlined />

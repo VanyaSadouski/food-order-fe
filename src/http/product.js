@@ -17,7 +17,19 @@ export const getProducts = async (body = {}) => {
 
 export const addProduct = async (body) => {
   try {
-    return await $authHost.post('products/add', body);
+    return await $authHost.post('products/add', body, {
+      headers: {
+        'Content-Type': 'multipart/form-data',
+      },
+    });
+  } catch (err) {
+    notificationErrorHandler(err?.response);
+  }
+};
+
+export const getImage = async (imageName) => {
+  try {
+    return await $host.get(`products/image/${imageName}`);
   } catch (err) {
     notificationErrorHandler(err?.response);
   }

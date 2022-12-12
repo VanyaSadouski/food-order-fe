@@ -20,6 +20,7 @@ function Admin() {
   const [newDishForm] = Form.useForm();
   const dispatch = useDispatch();
   const [isFormActive, setIsFormActive] = useState(false);
+  const [image, setImage] = useState(false);
   const [products, setProducts] = useState(null);
   const fetchProducts = async () => {
     const productsResponse = await getProducts({ pagination: false });
@@ -37,22 +38,21 @@ function Admin() {
     try {
       await newDishForm.validateFields();
       const formData = await newDishForm.getFieldsValue();
-      const preparedBody = {
-        ...formData,
-        img: formData?.image?.file,
-      };
-      await addProduct(preparedBody);
+      await addProduct({ ...formData, image });
       fetchProducts();
       setIsFormActive(!isFormActive);
     } catch (err) {
       notification.error({
         message: 'Please fullfill product info',
       });
+    } finally {
+      newDishForm.resetFields();
+      setImage(null);
     }
   };
 
-  const onAddNewDish = () => {
-    setIsFormActive(!isFormActive);
+  const onSetImage = (imageValue) => {
+    setImage(imageValue);
   };
 
   const removeProduct = async (id) => {
@@ -75,8 +75,8 @@ function Admin() {
       <NewDishForm
         isFormActive={isFormActive}
         newDishForm={newDishForm}
-        onAddNewDish={onAddNewDish}
         onFinish={() => onFinish()}
+        setImage={onSetImage}
       />
     </Wrapper>
   );

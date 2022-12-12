@@ -8,7 +8,7 @@ const OrderWrapper = styled.div`
   box-shadow: 0px 0px 3px 0px rgba(34, 60, 80, 0.2);
   padding: 20px;
   display: flex;
-  align-items: center;
+  flex-direction: column;
   justify-content: space-between;
   font-size: 20px;
 

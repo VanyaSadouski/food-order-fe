@@ -1,6 +1,6 @@
 /* eslint-disable no-plusplus */
 import { Button, notification } from 'antd';
-import React from 'react';
+import React, { useEffect, useState } from 'react';
 import { useDispatch, useSelector } from 'react-redux';
 import { useNavigate } from 'react-router';
 import styled from 'styled-components';
@@ -89,17 +89,25 @@ function Cart() {
   const dispatch = useDispatch();
   const { orderInfo } = useSelector((s) => s.order);
   const { userInfo } = useSelector((s) => s.user);
-  const totalPrice = orderInfo?.reduce((partialSum, a) => partialSum + a.price, 0);
-  const totalPreparingTime = orderInfo?.reduce((partialSum, a) => partialSum + a.time, 0);
-  const duplicatedProductsInOrder = orderInfo?.reduce((a, b) => {
-    const i = a.findIndex((x) => x.productId === b.productId);
-    return (
-      i === -1
-        ? a.push({ productId: b.productId, times: 1, product: b.product, price: b.price, time: b.time })
-        : a[i].times++,
-      a
+  const [totalPrice, setTotalPrice] = useState();
+  const [totalPreparingTime, setTotalPreparingTime] = useState();
+  const [duplicatedProductsInOrder, setDuplicatedProductsInOrder] = useState();
+
+  useEffect(() => {
+    setTotalPrice(orderInfo?.reduce((partialSum, a) => partialSum + a.price, 0));
+    setTotalPreparingTime(orderInfo?.reduce((partialSum, a) => partialSum + a.time, 0));
+    setDuplicatedProductsInOrder(
+      orderInfo?.reduce((a, b) => {
+        const i = a.findIndex((x) => x.productId === b.productId);
+        return (
+          i === -1
+            ? a.push({ productId: b.productId, times: 1, product: b.product, price: b.price, time: b.time })
+            : a[i].times++,
+          a
+        );
+      }, []),
     );
-  }, []);
+  }, [orderInfo]);
 
   const removeFromCart = (product) => {
     const similarProductsInPendingOrder = orderInfo?.filter((el) => el.productId === product.productId);

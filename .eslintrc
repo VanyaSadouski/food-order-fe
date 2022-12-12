@@ -23,13 +23,6 @@
     "react/prop-types": "off",
     "react/destructuring-assignment": "off",
     "class-methods-use-this": "off",
-    "prettier/prettier": [
-      "error",
-      {
-        "trailingComma": "all",
-        "printWidth": 120
-      }
-    ],
     "no-underscore-dangle": "off",
     "no-param-reassign": "off",
     "no-restricted-globals": "off",
