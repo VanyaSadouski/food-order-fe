@@ -1,16 +1,11 @@
 import React, { useEffect, useState } from 'react';
 import { useDispatch } from 'react-redux';
 import { BrowserRouter } from 'react-router-dom';
-import styled from 'styled-components';
 import AppRouter from './components/AppRouter';
 import Navbar from './components/Navbar';
 import { check } from './http/userAPI';
 import { setOrderInfo } from './store/order';
 import { setUserInfo } from './store/user';
-
-const AppWrapper = styled.div`
-  padding: 50px;
-`;
 
 function App() {
   const dispatch = useDispatch();
@@ -36,9 +31,9 @@ function App() {
   return isDataFetched ? (
     <BrowserRouter>
       <Navbar />
-      <AppWrapper>
+      <div style={{ padding: '50px' }}>
         <AppRouter style={{ padding: '50px' }} />
-      </AppWrapper>
+      </div>
     </BrowserRouter>
   ) : null;
 }

@@ -3,7 +3,7 @@ import React, { useEffect, useState } from 'react';
 import styled from 'styled-components';
 import { useDispatch } from 'react-redux';
 import NewDishForm from '../components/NewDishForm/NewDishForm';
-import ProductItem from '../shared/components/ProductItem';
+import ProductItem from '../shared/components/ProductItem/ProductItem';
 import { notification } from '../shared/antd/services';
 import { addProduct, deleteProduct, getProducts } from '../http/product';
 import { setOrderInfo } from '../store/order';

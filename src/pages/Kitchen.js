@@ -4,7 +4,7 @@ import { useNavigate } from 'react-router';
 import styled from 'styled-components';
 import { Select } from 'antd';
 import { getProducts } from '../http/product';
-import ProductItem from '../shared/components/ProductItem';
+import ProductItem from '../shared/components/ProductItem/ProductItem';
 import { setOrderInfo } from '../store/order';
 import { LOGIN } from '../util/consts';
 
