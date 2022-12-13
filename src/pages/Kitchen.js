@@ -17,6 +17,10 @@ const Wrapper = styled.div`
     justify-content: flex-end;
     margin-bottom: 25px;
 
+    span {
+      padding-right: 5px;
+    }
+
     .ant-select {
       width: 100px;
     }
@@ -83,7 +87,7 @@ function Kitchen() {
   return (
     <Wrapper>
       <div className="page-size">
-        Page size:
+        <span>Page size:</span>
         <Select defaultValue="5" onChange={(value) => changePageSize(value)}>
           <Option value={5}>5</Option>
           <Option value={20}>20</Option>
